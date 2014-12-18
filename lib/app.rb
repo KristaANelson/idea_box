@@ -1,5 +1,6 @@
 require 'idea_box'
 class IdeaBoxApp < Sinatra::Base
+  attr_reader :checked
   set :method_override, true
   set :root, 'lib/app'
   configure :development do
@@ -11,7 +12,7 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/' do
-    erb :index, locals: {ideas: IdeaStore.all.sort}
+    erb :index, locals: {ideas: IdeaStore.all.sort, idea: Idea.new(params)}
   end
 
   post '/' do
@@ -21,7 +22,7 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/:tag' do
-    erb :index, locals: {ideas: IdeaStore.filter(params[:tag])}
+    erb :index, locals: {ideas: IdeaStore.filter(params[:tag]), idea: Idean.new(params)}
   end
 
   delete '/:id' do |id|
@@ -30,9 +31,8 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/:id/edit' do |id|
-    idea = IdeaStore.find(idea.id.to_i)
+    idea = IdeaStore.find(id.to_i)
     erb :edit, locals: {idea: idea}
-
   end
 
   put '/:id' do |id|

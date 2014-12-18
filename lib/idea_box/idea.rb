@@ -19,6 +19,7 @@ class Idea
       "title" => title,
       "description" => description,
       "rank" => rank,
+      "tags" => tags
     }
   end
 

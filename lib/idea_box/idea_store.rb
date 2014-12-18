@@ -3,9 +3,11 @@ class IdeaStore
   attr_reader :title, :description
 
   def self.all
-    raw_ideas.map.with_index do |data, i|
-      Idea.new(data.merge("id" => i))
+    ideas = []
+    raw_ideas.each_with_index do |data, i|
+      ideas << Idea.new(data.merge("id" => i))
     end
+    ideas
   end
 
   def self.raw_ideas

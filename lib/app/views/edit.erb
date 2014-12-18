@@ -1,6 +1,4 @@
-
 <h1>IdeaBox</h1>
-
 <form action="/<%= idea.id %>" method="POST">
   <p>
     <% if idea.id %>
@@ -9,9 +7,29 @@
     Your Idea:
     <% end %>
   </p>
-  <% if idea.id %>
+  <%if idea.id %>
   <input type="hidden" name="_method" value="PUT" />
   <input type='text' name='idea[title]' value="<%= idea.title %>"/><br/>
   <textarea name='idea[description]'><%= idea.description %></textarea><br/>
-  <input type='submit'/>
+  <%if idea.tags.include?("general,") %>
+    <input type="checkbox" name='idea[general_tag]' value="general," checked >General<br>
+  <% else%>
+    <input type="checkbox" name='idea[general_tag]' value="general," >General<br>
+  <%end%>
+  <%if idea.tags.include?("career,") %>
+    <input type="checkbox" name='idea[career_tag]' value="career," checked >Career<br>
+  <% else%>
+    <input type="checkbox" name='idea[general_tag]' value="general," >Career<br>
+  <%end%>
+  <%if idea.tags.include?("Health,") %>
+    <input type="checkbox" name='idea[general_tag]' value="general," checked >Health<br>
+  <% else%>
+    <input type="checkbox" name='idea[general_tag]' value="general," >Health<br>
+  <%end%>
+  <%if idea.tags.include?("general,") %>
+    <input type="checkbox" name='idea[general_tag]' value="general," checked >Social<br>
+  <% else%>
+    <input type="checkbox" name='idea[general_tag]' value="general," >Social<br>
+  <%end%>
+  <% end%>
 </form>
