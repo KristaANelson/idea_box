@@ -1,0 +1,13 @@
+---
+ideas:
+- title: first
+  description: idea
+  rank: 3
+- title: second
+  description: idea
+- title: third
+  description: idea
+  rank: 4
+- title: idea
+  description: most liked should be on top
+  rank: 3
