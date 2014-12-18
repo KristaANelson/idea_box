@@ -11,12 +11,17 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/' do
-    erb :index, locals: {ideas: IdeaStore.all.sort, idea:Idea.new(params)}
+    erb :index, locals: {ideas: IdeaStore.all.sort}
   end
 
   post '/' do
+    p params.inspect
     IdeaStore.create(params[:idea])
     redirect '/'
+  end
+
+  get '/:tag' do
+    erb :index, locals: {ideas: IdeaStore.filter(params[:tag])}
   end
 
   delete '/:id' do |id|

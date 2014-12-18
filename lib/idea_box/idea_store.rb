@@ -2,17 +2,10 @@ require 'yaml/store'
 class IdeaStore
   attr_reader :title, :description
 
-  def initialize(attributes)
-    @title = attributes['title']
-    @description = attributes['description']
-  end
-
   def self.all
-    ideas = []
-    raw_ideas.each_with_index do |data, i|
-      ideas << Idea.new(data.merge("id" => i))
+    raw_ideas.map.with_index do |data, i|
+      Idea.new(data.merge("id" => i))
     end
-    ideas
   end
 
   def self.raw_ideas
@@ -59,5 +52,9 @@ class IdeaStore
     database.transaction do
       database['ideas'] << attributes
     end
+  end
+
+  def self.filter(tag)
+  all.select {|idea| idea.tags.include?(tag)}
   end
 end

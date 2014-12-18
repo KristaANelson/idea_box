@@ -1,22 +1,27 @@
 <h1>IdeaBox - Store your Ideas</h1>
 <form action='/' method='POST'>
   <p>
-    Let's see what you got! Put your Idea:
+    Let's see what you got! What is your Idea:
   </p>
   <input type='text' name='idea[title]'/><br/>
   <textarea name='idea[description]'></textarea><br/>
+  <input type="checkbox" name='idea[general_tag]' value="general," checked> General<br>
+  <input type="checkbox" name='idea[career_tag]' value="career," > Career<br>
+  <input type="checkbox" name='idea[health_tag]' value="health," > Health<br>
+  <input type="checkbox" name='idea[social_tag]' value="social,"> Social<br>
   <input type='submit'/>
 </form>
 <h3>Existing Ideas:</h3>
-
+<%= "No ideas yet, go ahead and input some above!" if ideas.empty? %>
 <ul>
   <% ideas.each do |idea| %>
   <li>
+    Title: <%= idea.title %><br/>
+    Description: <%= idea.description %><br/>
+    Tags: <%= idea.tags.join(" ")%><br/>
     <form action='/<%= idea.id %>/like' method='POST' style="display: inline">
-      <input type='submit' value="+"/>
+      <input type='submit' value="+ I like it!"/><br/>
     </form>
-    <%= idea.title %><br/>
-    <%= idea.description %>
     <a href="/<%= idea.id %>/edit">Edit</a>
     <form action='/<%= idea.id %>' method='POST'>
       <input type="hidden" name="_method" value="DELETE">
@@ -25,3 +30,13 @@
   </li>
   <% end %>
 </ul>
+
+<h3> Sorted Ideas:</h3>
+  <ul>
+    <li>
+      <a href="/general">General</a>
+      <a href="/career">Career</a>
+      <a href="/health">Health</a>
+      <a href="/social">Social</a>
+    </li>
+  </ul>
