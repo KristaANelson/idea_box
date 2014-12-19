@@ -1,1 +1,11 @@
-
+---
+ideas:
+- title: g and c
+  description: lkjwe
+  general_tag: general,
+  career_tag: career,
+- title: idea
+  description: lkjwe
+  general_tag: general,
+  career_tag: career,
+  health_tag: health,

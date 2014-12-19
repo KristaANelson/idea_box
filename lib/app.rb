@@ -22,7 +22,7 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/:tag' do
-    erb :index, locals: {ideas: IdeaStore.filter(params[:tag]), idea: Idean.new(params)}
+    erb :index, locals: {ideas: IdeaStore.filter(params[:tag]), idea: Idea.new(params)}
   end
 
   delete '/:id' do |id|

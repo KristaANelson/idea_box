@@ -57,6 +57,6 @@ class IdeaStore
   end
 
   def self.filter(tag)
-  all.select {|idea| idea.tags.include?(tag)}
+  all.select {|idea| idea.tags.include?("#{tag}," )}
   end
 end
